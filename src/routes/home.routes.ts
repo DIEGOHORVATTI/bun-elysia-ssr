@@ -5,7 +5,7 @@ import { renderToReadableStream } from 'react-dom/server'
 
 import App from '../react/App'
 
-const router = new Elysia({ prefix: '/', tags: ['Home'] }).get('/', async () => {
+const router = new Elysia({ prefix: '/home', tags: ['Home'] }).get('/', async () => {
   // create our react App component
   const app = createElement(App)
 

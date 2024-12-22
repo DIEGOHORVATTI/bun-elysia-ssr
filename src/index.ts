@@ -27,5 +27,5 @@ new Elysia()
     return error
   })
   .use(router(__dirname))
-  .get('/', () => `API is running 🚀: v${version}`) // Rota principal
+  .get('/version', () => `API is running 🚀: v${version}`) // Rota principal
   .listen(PORT, ({ url }) => console.info(`🦊 Elysia is running at ${url}`))

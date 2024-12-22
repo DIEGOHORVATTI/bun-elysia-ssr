@@ -1,18 +1,14 @@
 /// <reference lib="dom" />
 /// <reference lib="dom.iterable" />
 
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-
+// import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
 import { hydrateRoot } from 'react-dom/client'
+import App from './App'
 
-export const App = hydrateRoot(
+hydrateRoot(
   document,
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<h1>Home</h1>} />
-      <Route path="/auth" element={<h1>Auth</h1>} />
-
-      <Route path="*" element={<h1>Not Found</h1>} />
-    </Routes>
+    <App />
   </BrowserRouter>
 )

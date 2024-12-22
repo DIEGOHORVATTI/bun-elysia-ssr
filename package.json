@@ -8,12 +8,10 @@
   "dependencies": {
     "@elysiajs/static": "latest",
     "@elysiajs/swagger": "latest",
-    "@types/react-router-dom": "^5.3.3",
     "elysia": "latest",
     "elysia-rate-limit": "latest",
     "react": "latest",
-    "react-dom": "latest",
-    "react-router-dom": "latest"
+    "react-dom": "latest"
   },
   "devDependencies": {
     "@types/react": "latest",

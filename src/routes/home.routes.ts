@@ -6,7 +6,7 @@ import { renderToReadableStream } from 'react-dom/server'
 
 import App from '../react/App'
 
-const router = new Elysia({ prefix: '/', tags: ['Home'] }).get('/', async ({ request }) => {
+const router = new Elysia({ tags: ['Home'] }).get('/', async ({ request }) => {
   const app = createElement(StaticRouter, { location: request.url }, createElement(App))
 
   const stream = await renderToReadableStream(app, {

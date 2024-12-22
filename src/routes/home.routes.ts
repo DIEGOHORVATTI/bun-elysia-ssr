@@ -3,7 +3,7 @@ import { Elysia } from 'elysia'
 import { createElement } from 'react'
 import { renderToReadableStream } from 'react-dom/server'
 
-import App from '../react/App'
+import { App } from '../react'
 
 const router = new Elysia({ prefix: '/', tags: ['Home'] }).get('/', async () => {
   const app = createElement(App)

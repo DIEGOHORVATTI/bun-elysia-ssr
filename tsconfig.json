@@ -2,9 +2,7 @@
   "compilerOptions": {
     "target": "ESNext",
     "module": "CommonJS",
-    "jsx": "react",
-    "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment",
+    "jsx": "react-jsx",
     "moduleResolution": "node",
     "types": ["bun-types"],
     "esModuleInterop": true,

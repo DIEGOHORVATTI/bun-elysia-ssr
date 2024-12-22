@@ -9,7 +9,7 @@
     "@elysiajs/static": "latest",
     "@elysiajs/swagger": "latest",
     "elysia": "latest",
-    "elysia-rate-limit": "^4.1.0",
+    "elysia-rate-limit": "latest",
     "react": "latest",
     "react-dom": "latest"
   },

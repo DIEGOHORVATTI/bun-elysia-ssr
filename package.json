@@ -7,7 +7,9 @@
   },
   "dependencies": {
     "@elysiajs/static": "latest",
+    "@elysiajs/swagger": "latest",
     "elysia": "latest",
+    "elysia-rate-limit": "^4.1.0",
     "react": "latest",
     "react-dom": "latest"
   },

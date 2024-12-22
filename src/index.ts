@@ -1,29 +1,31 @@
-import { Elysia } from 'elysia';
-import { staticPlugin } from '@elysiajs/static';
-import { renderToReadableStream } from 'react-dom/server';
-import { createElement } from 'react';
-import App from './react/App';
+import { Elysia } from 'elysia'
+import { staticPlugin } from '@elysiajs/static'
 
-// bundle client side react-code each time the server starts
-await Bun.build({
-  entrypoints: ['./src/react/index.tsx'],
-  outdir: './public'
-});
+import { openApi, rateLimit } from '@/middlewares'
+import { PORT, version } from '@/constants/config'
 
-const app = new Elysia()
+import { router } from './router'
+
+new Elysia()
+  .use(openApi)
+  .use(rateLimit)
   .use(staticPlugin())
-  .get('/', async () => {
-    // create our react App component
-    const app = createElement(App);
+  .onError(({ code, error }) => {
+    if (code === 'NOT_FOUND') return 'Route not found 😭'
 
-    // render the app component to a readable stream
-    const stream = await renderToReadableStream(app, {
-      bootstrapScripts: ['/public/index.js']
-    });
+    if (code === 'VALIDATION') {
+      const { summary, ...primaryError } = error.all[0]
 
-    // output the stream as the response
-    return new Response(stream, {
-      headers: { 'Content-Type': 'text/html' }
-    });
+      if ('path' in primaryError)
+        return {
+          error: `${primaryError.path.slice('/'.length)}: ${summary}`
+        }
+
+      return { error: summary }
+    }
+
+    return error
   })
-  .listen(3000);
+  .use(router(__dirname))
+  .get('/', () => `API is running 🚀: v${version}`) // Rota principal
+  .listen(PORT, ({ url }) => console.info(`🦊 Elysia is running at ${url}`))

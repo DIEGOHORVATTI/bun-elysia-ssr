@@ -1,8 +1,7 @@
-// src/react/App.tsx
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
 export default function App() {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(0)
   return (
     <html>
       <head>
@@ -16,5 +15,5 @@ export default function App() {
         <button onClick={() => setCount(count + 1)}>Increment</button>
       </body>
     </html>
-  );
+  )
 }

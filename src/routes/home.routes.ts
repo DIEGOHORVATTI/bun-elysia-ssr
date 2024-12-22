@@ -9,9 +9,7 @@ import Home from '../react/Home'
 const router = new Elysia({ tags: ['Home'] }).get('/', async ({ request }) => {
   const app = createElement(StaticRouter, { location: request.url }, createElement(Home))
 
-  const stream = await renderToReadableStream(app, {
-    bootstrapScripts: ['/public/index.js']
-  })
+  const stream = await renderToReadableStream(app)
 
   return new Response(stream, {
     headers: { 'Content-Type': 'text/html' }

@@ -11,7 +11,8 @@
     "elysia": "latest",
     "elysia-rate-limit": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-router-dom": "latest"
   },
   "devDependencies": {
     "@types/react": "latest",

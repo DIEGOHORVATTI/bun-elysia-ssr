@@ -11,28 +11,19 @@ import SPAPage from '@/react/pages/examples/SPA'
 import { mockDocs } from '@/__mock__/docs'
 import { mockPosts } from '@/__mock__/posts'
 
-const buildConfigs = {
-  csr: {
-    entrypoint: './src/react/entries/csr.tsx',
-    name: 'csr.js'
-  },
-  spa: {
-    entrypoint: './src/react/entries/spa.tsx',
-    name: 'spa.js'
-  }
+type BuildClientProps = {
+  entrypoints: Array<string>
+  naming: string
 }
-
-const buildClient = async (config: (typeof buildConfigs)[keyof typeof buildConfigs]) => {
+const buildClient = async ({ entrypoints, naming }: BuildClientProps) => {
   await Bun.build({
-    entrypoints: [config.entrypoint],
+    entrypoints,
+    naming,
     outdir: './public',
-    naming: config.name,
     target: 'browser',
     minify: true
   })
 }
-
-await Promise.all([buildClient(buildConfigs.csr), buildClient(buildConfigs.spa)])
 
 // Cache do conteúdo SSG
 const staticContent = await renderToReadableStream(createElement(SSGPage, { docs: mockDocs }))
@@ -40,6 +31,8 @@ const staticHTML = await new Response(staticContent).text()
 
 const router = new Elysia({ prefix: '/examples', tags: ['Examples'] })
   .get('/csr', async () => {
+    await buildClient({ entrypoints: ['./src/react/entries/csr.tsx'], naming: 'csr.js' })
+
     const stream = await renderToReadableStream(createElement(CSRPage), { bootstrapScripts: ['/public/csr.js'] })
 
     return new Response(stream, { headers: { 'Content-Type': 'text/html' } })
@@ -56,6 +49,8 @@ const router = new Elysia({ prefix: '/examples', tags: ['Examples'] })
   })
 
   .get('/spa', async () => {
+    await buildClient({ entrypoints: ['./src/react/entries/spa.tsx'], naming: 'spa.js' })
+
     const stream = await renderToReadableStream(createElement(SPAPage), { bootstrapScripts: ['/public/spa.js'] })
 
     return new Response(stream, { headers: { 'Content-Type': 'text/html' } })

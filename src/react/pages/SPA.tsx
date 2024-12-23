@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import Main from '@/react/layouts/Main'
 
-export default function Home() {
+export default function SPAPage() {
   const [count, setCount] = useState(0)
 
   return (

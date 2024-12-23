@@ -4,22 +4,32 @@ import { createElement } from 'react'
 import { StaticRouter } from 'react-router-dom'
 import { renderToReadableStream } from 'react-dom/server'
 
-import CSRPage from '@/react/pages/CSRPage'
-import SSRPage from '@/react/pages/SSRPage'
-import SSGPage from '@/react/pages/SSGPage'
+import CSRPage from '@/react/pages/CSR'
+import SSRPage from '@/react/pages/SSR'
+import SSGPage from '@/react/pages/SSG'
+import SPAPage from '@/react/pages/SPA'
 
 const router = new Elysia({ prefix: '/examples' })
-  .get('/csr', async () => {
-    const app = createElement(StaticRouter, { location: '/examples/csr' }, createElement(CSRPage))
+  .get('/spa', async ({ request: { url } }) => {
+    const app = createElement(StaticRouter, { location: url }, createElement(SPAPage))
+
+    const spaStream = await renderToReadableStream(app)
+
+    return new Response(spaStream, { headers: { 'Content-Type': 'text/html' } })
+  })
+  .get('/csr', async ({ request: { url } }) => {
+    const app = createElement(StaticRouter, { location: url }, createElement(CSRPage))
 
     const csrStream = await renderToReadableStream(app)
+
     return new Response(csrStream, { headers: { 'Content-Type': 'text/html' } })
   })
 
-  .get('/ssr', async () => {
-    const app = createElement(StaticRouter, { location: '/examples/ssr' }, createElement(SSRPage, { posts: mockPosts }))
+  .get('/ssr', async ({ request: { url } }) => {
+    const app = createElement(StaticRouter, { location: url }, createElement(SSRPage, { posts: mockPosts }))
 
     const ssrStream = await renderToReadableStream(app)
+
     return new Response(ssrStream, { headers: { 'Content-Type': 'text/html' } })
   })
   .get('/ssg', async () => {

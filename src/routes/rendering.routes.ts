@@ -11,11 +11,21 @@ import SPAPage from '@/react/pages/SPA'
 
 const router = new Elysia({ prefix: '/examples', tags: ['examples'] })
   .get('/spa', async ({ request: { url } }) => {
-    const app = createElement(StaticRouter, { location: url }, createElement(SPAPage))
+    const page = createElement(SPAPage)
 
-    const spaStream = await renderToReadableStream(app)
+    await Bun.build({
+      target: 'browser',
+      format: 'iife',
+      minify: true,
+      outdir: './public',
+      entrypoints: ['./src/react/pages/index.tsx']
+    })
 
-    return new Response(spaStream, { headers: { 'Content-Type': 'text/html' } })
+    const stream = await renderToReadableStream(page, {
+      bootstrapScripts: ['/public/index.js']
+    })
+
+    return new Response(stream, { headers: { 'Content-Type': 'text/html' } })
   })
 
   .get('/csr', async ({ request: { url } }) => {

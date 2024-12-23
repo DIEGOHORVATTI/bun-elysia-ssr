@@ -1,9 +1,13 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import Main from '@/react/layouts/Main'
 
 export default function SPAPage() {
   const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    alert('Mounted')
+  }, [])
 
   return (
     <Main>

@@ -1,11 +1,18 @@
 import Elysia from 'elysia'
 
-import { fetchProducts } from '@/services/products'
+import { mockProducts } from '@/__mock__/products'
+
+export interface Product {
+  id: number
+  name: string
+  price: number
+  description: string
+}
 
 const router = new Elysia({ prefix: '/products', tags: ['Produtos'] }).get('/', async () => {
-  const products = fetchProducts()
+  await new Promise(resolve => setTimeout(resolve, 1000))
 
-  return products
+  return mockProducts
 })
 
 export default router

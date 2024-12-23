@@ -1,19 +1,16 @@
 import Main from '@/react/layouts/Main'
+import Navigation from '@/react/components/Navigation'
 
 export default function Home() {
   return (
     <Main>
-      <h1>Welcome to Elysia</h1>
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-8">SPA Home</h1>
 
-      <ul>
-        {['ssg', 'ssr', 'csr', 'spa'].map(page => (
-          <li key={page}>
-            <h2>
-              <a href={`/examples/${page}`}>{page}</a>
-            </h2>
-          </li>
-        ))}
-      </ul>
+        <main>
+          <Navigation />
+        </main>
+      </div>
     </Main>
   )
 }

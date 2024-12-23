@@ -1,6 +1,13 @@
 import { Link } from 'react-router-dom'
 
 export default function Navigation() {
+  const links = [
+    { to: '/examples/csr', label: 'CSR' },
+    { to: '/examples/ssr', label: 'SSR' },
+    { to: '/examples/ssg', label: 'SSG' },
+    { to: '/examples/spa', label: 'SPA' }
+  ]
+
   return (
     <nav className="bg-white shadow-md">
       <div className="container mx-auto px-4">
@@ -10,18 +17,11 @@ export default function Navigation() {
           </Link>
 
           <div className="flex space-x-4">
-            <Link to="/examples/csr" className="hover:text-blue-600">
-              CSR
-            </Link>
-            <Link to="/examples/ssr" className="hover:text-blue-600">
-              SSR
-            </Link>
-            <Link to="/examples/ssg" className="hover:text-blue-600">
-              SSG
-            </Link>
-            <Link to="/examples/spa" className="hover:text-blue-600">
-              SPA
-            </Link>
+            {links.map(link => (
+              <Link key={link.to} to={link.to} className="hover:text-blue-600">
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
       </div>

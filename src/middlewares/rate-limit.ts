@@ -16,7 +16,9 @@ export const rateLimit = apiRateLimiter({
     // Utiliza o IP real do cliente sem a necessidade de cabeçalhos adicionais
     const clientIpAddress = server?.requestIP(req)?.address ?? ''
 
-    console.info('🟢 ╰┈➤ Ip: ', clientIpAddress)
+    const parsedUrl = new URL(req.url).pathname
+
+    console.info(`🌱 Route: ${parsedUrl} | ⚪ IP: ${clientIpAddress}`)
 
     return clientIpAddress
   },

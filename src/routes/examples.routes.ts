@@ -3,10 +3,10 @@ import { createElement } from 'react'
 
 import { renderToReadableStream } from 'react-dom/server'
 
-import CSRPage from '@/react/pages/CSR'
-import SSRPage from '@/react/pages/SSR'
-import SSGPage from '@/react/pages/SSG'
-import SPAPage from '@/react/pages/SPA'
+import CSRPage from '@/react/pages/examples/CSR'
+import SSRPage from '@/react/pages/examples/SSR'
+import SSGPage from '@/react/pages/examples/SSG'
+import SPAPage from '@/react/pages/examples/SPA'
 
 import { mockDocs } from '@/__mock__/docs'
 import { mockPosts } from '@/__mock__/posts'

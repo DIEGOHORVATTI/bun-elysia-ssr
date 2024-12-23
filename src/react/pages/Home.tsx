@@ -7,9 +7,7 @@ export default function Home() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">SPA Home</h1>
 
-        <main>
-          <Navigation />
-        </main>
+        <Navigation />
       </div>
     </Main>
   )

@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { ProductList } from '@/react/components/features/ProductList'
 import { Button } from '@/react/components/ui/Button'
-
-import BaseLayout from '@/react/layouts/BaseLayout'
+import Main from '../../layouts/Main'
 
 export default function CSRPage() {
   const [products, setProducts] = useState([])
@@ -27,12 +26,12 @@ export default function CSRPage() {
   }
 
   return (
-    <BaseLayout title="Client-Side Rendering (CSR)">
+    <Main title="Client-Side Rendering (CSR)">
       <div className="mb-8">
         <Button onClick={loadProducts}>Refresh Products</Button>
       </div>
 
       {loading ? <p>Loading products...</p> : <ProductList products={products} />}
-    </BaseLayout>
+    </Main>
   )
 }

@@ -1,20 +1,21 @@
 import { useEffect, useState } from 'react'
-import Main from '@/react/layouts/Main'
-import { ProductList } from '@/react/components/features/ProductList'
-import { Button } from '@/react/components/ui/Button'
+import { ProductList } from '../components/features/ProductList'
+import { Button } from '../components/ui/Button'
+import BaseLayout from '../layouts/BaseLayout'
+import { fetchProducts } from '../services/products'
 
 export default function CSRPage() {
   const [products, setProducts] = useState([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    fetchProducts()
+    loadProducts()
   }, [])
 
-  async function fetchProducts() {
+  const loadProducts = async () => {
+    setLoading(true)
     try {
-      const response = await fetch('https://api.example.com/products')
-      const data = await response.json()
+      const data = await fetchProducts()
       setProducts(data)
     } catch (error) {
       console.error('Failed to fetch products:', error)
@@ -24,16 +25,12 @@ export default function CSRPage() {
   }
 
   return (
-    <Main>
-      <div className="max-w-7xl mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-8">Client-Side Rendering (CSR)</h1>
-
-        <div className="mb-8">
-          <Button onClick={() => fetchProducts()}>Refresh Products</Button>
-        </div>
-
-        {loading ? <p>Loading products...</p> : <ProductList products={products} />}
+    <BaseLayout title="Client-Side Rendering (CSR)">
+      <div className="mb-8">
+        <Button onClick={loadProducts}>Refresh Products</Button>
       </div>
-    </Main>
+
+      {loading ? <p>Loading products...</p> : <ProductList products={products} />}
+    </BaseLayout>
   )
 }

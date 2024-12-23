@@ -1,7 +1,8 @@
 import Main from '@/react/layouts/Main'
+
 import { BlogPost } from '@/react/components/features/BlogPost'
 
-interface SSRPageProps {
+type SSRPageProps = {
   posts: Array<{
     id: number
     title: string

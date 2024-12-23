@@ -21,6 +21,7 @@ const buildClient = async ({ entrypoints, naming }: BuildClientProps) => {
     naming,
     outdir: './public',
     target: 'browser',
+    format: 'iife',
     minify: true
   })
 }

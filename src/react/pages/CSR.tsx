@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { ProductList } from '../components/features/ProductList'
-import { Button } from '../components/ui/Button'
-import BaseLayout from '../layouts/BaseLayout'
-import { fetchProducts } from '../services/products'
+
+import { ProductList } from '@/react/components/features/ProductList'
+import { Button } from '@/react/components/ui/Button'
+
+import BaseLayout from '@/react/layouts/BaseLayout'
 
 export default function CSRPage() {
   const [products, setProducts] = useState([])
@@ -15,7 +16,8 @@ export default function CSRPage() {
   const loadProducts = async () => {
     setLoading(true)
     try {
-      const data = await fetchProducts()
+      const data = await fetch('/products').then(res => res.json())
+
       setProducts(data)
     } catch (error) {
       console.error('Failed to fetch products:', error)

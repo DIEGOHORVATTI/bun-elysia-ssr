@@ -17,6 +17,7 @@ const router = new Elysia({ prefix: '/examples' })
 
     return new Response(spaStream, { headers: { 'Content-Type': 'text/html' } })
   })
+
   .get('/csr', async ({ request: { url } }) => {
     const app = createElement(StaticRouter, { location: url }, createElement(CSRPage))
 
@@ -32,6 +33,7 @@ const router = new Elysia({ prefix: '/examples' })
 
     return new Response(ssrStream, { headers: { 'Content-Type': 'text/html' } })
   })
+
   .get('/ssg', async () => {
     return new Response(staticHTML, { headers: { 'Content-Type': 'text/html' } })
   })
@@ -71,5 +73,6 @@ const mockDocs = [
   }
 ]
 
+// A cada deploy, o conteúdo estático é gerado novamente
 const staticContent = await renderToReadableStream(createElement(SSGPage, { docs: mockDocs }))
 const staticHTML = await new Response(staticContent).text()

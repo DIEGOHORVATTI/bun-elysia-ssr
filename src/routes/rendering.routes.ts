@@ -9,7 +9,7 @@ import SSRPage from '@/react/pages/SSR'
 import SSGPage from '@/react/pages/SSG'
 import SPAPage from '@/react/pages/SPA'
 
-const router = new Elysia({ prefix: '/examples' })
+const router = new Elysia({ prefix: '/examples', tags: ['examples'] })
   .get('/spa', async ({ request: { url } }) => {
     const app = createElement(StaticRouter, { location: url }, createElement(SPAPage))
 

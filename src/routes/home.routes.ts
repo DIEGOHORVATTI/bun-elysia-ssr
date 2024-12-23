@@ -6,7 +6,7 @@ import { StaticRouter } from 'react-router-dom'
 
 import Home from '@/react/pages/Home'
 
-const router = new Elysia().get('/', async ({ request: { url } }) => {
+const router = new Elysia({ prefix: '/', tags: ['Home'] }).get('/', async ({ request: { url } }) => {
   const app = createElement(StaticRouter, { location: url }, createElement(Home))
 
   const spaStream = await renderToReadableStream(app)

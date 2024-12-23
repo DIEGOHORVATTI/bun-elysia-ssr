@@ -8,7 +8,9 @@ export default function Home() {
       <ul>
         {['ssg', 'ssr', 'csr', 'spa'].map(page => (
           <li key={page}>
-            <a href={`/examples/${page}`}>{page}</a>
+            <h2>
+              <a href={`/examples/${page}`}>{page}</a>
+            </h2>
           </li>
         ))}
       </ul>

@@ -1,4 +1,4 @@
-export default function Main({ children }: React.PropsWithChildren<{}>) {
+export default function Main({ children }: React.PropsWithChildren) {
   return (
     <html>
       <head>
@@ -9,11 +9,7 @@ export default function Main({ children }: React.PropsWithChildren<{}>) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
 
-      <body>
-        {children}
-
-        <script src="/public/index.js"></script>
-      </body>
+      <body>{children}</body>
     </html>
   )
 }

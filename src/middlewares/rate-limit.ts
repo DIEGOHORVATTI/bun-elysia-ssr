@@ -18,7 +18,7 @@ export const rateLimit = apiRateLimiter({
 
     const parsedUrl = new URL(req.url).pathname
 
-    console.info(`🌱 Route: ${parsedUrl} | ⚪ IP: ${clientIpAddress}`)
+    console.info(`⚪ IP: ${clientIpAddress} | 🌱 Route: ${parsedUrl}`)
 
     return clientIpAddress
   },
